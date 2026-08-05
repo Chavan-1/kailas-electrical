@@ -1,6 +1,7 @@
 package com.kailaselectrical.enums;
 
-public enum Role {
-	ADMIN,
-	CUSTOMER
+public enum Language {
+	EN,
+	HI,
+	MR
 }
