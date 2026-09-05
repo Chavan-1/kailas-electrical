@@ -46,6 +46,17 @@ public class InvoiceController {
 						.build());
 	}
 	
+	@GetMapping("/booking/{bookingId}")
+	public ResponseEntity<ApiResponse<InvoiceResponse>> getInvoiceByBookingId(@PathVariable Long bookingId) {
+		
+		return ResponseEntity.ok(
+				ApiResponse.<InvoiceResponse>builder()
+						.success(true)
+						.message("Invoice fetched successfully")
+						.data(invoiceService.getInvoiceByBookingId(bookingId))
+						.build());
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<InvoiceResponse>> getInvoiceById(@PathVariable Long id) {
 		

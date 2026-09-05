@@ -34,6 +34,8 @@ public class InvoiceMapper {
 				.invoiceNumber(invoice.getInvoiceNumber())
 				.bookingNumber(invoice.getBooking().getBookingNumber())
 				.customerName(invoice.getBooking().getCustomer().getFullName())
+				.phoneNumber(invoice.getBooking().getCustomer().getPhoneNumber())
+		        .email(invoice.getBooking().getCustomer().getEmail())
 				.invoiceDate(invoice.getInvoiceDate())
 				.items(items)
 				.subtotal(invoice.getSubtotal())

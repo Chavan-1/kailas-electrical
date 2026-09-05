@@ -7,6 +7,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,4 +37,7 @@ public class User extends BaseEntity{
 	
 	@Column(nullable = false)
 	private Boolean enabled = true;
+	
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+	private Customer customer;
 }

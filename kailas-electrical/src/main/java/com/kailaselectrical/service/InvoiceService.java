@@ -12,6 +12,8 @@ public interface InvoiceService {
 	
 	InvoiceResponse getInvoiceById(Long id);
 	
+	InvoiceResponse getInvoiceByBookingId(Long bookingId);
+	
 	PageResponse<InvoiceResponse> getAllInvoices(InvoiceSearchCriteria criteria);
 	
 	InvoiceResponse updatePaymentStatus(Long id, UpdatePaymentStatusRequest request);

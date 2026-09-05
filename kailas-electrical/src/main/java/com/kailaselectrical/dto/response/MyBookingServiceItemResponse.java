@@ -11,6 +11,8 @@ import lombok.Setter;
 @Builder
 public class MyBookingServiceItemResponse {
 	
+	private Long serviceId;
+	
 	private String serviceName;
 	
 	private BigDecimal price;

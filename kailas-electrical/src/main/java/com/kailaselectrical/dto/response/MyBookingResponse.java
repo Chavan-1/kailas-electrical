@@ -29,4 +29,6 @@ public class MyBookingResponse {
 	private BigDecimal totalAmount;
 	
 	List<MyBookingServiceItemResponse> services;
+	
+	private String remarks;
 }

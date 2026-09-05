@@ -40,12 +40,14 @@ public class MyBookingMapper {
 				.status(booking.getStatus())
 				.totalAmount(totalAmount)
 				.services(services)
+				.remarks(booking.getRemarks())
 				.build();
 	}
 	
 	public MyBookingServiceItemResponse toServiceItemResponse(BookingServiceItem item) {
 		
 		return MyBookingServiceItemResponse.builder()
+				.serviceId(item.getElectricalService().getId())
 				.serviceName(translationService.getServiceName(item.getElectricalService()))
 				.price(item.getPriceAtBookingTime())
 				.build();

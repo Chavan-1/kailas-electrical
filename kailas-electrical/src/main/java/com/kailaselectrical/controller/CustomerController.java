@@ -61,7 +61,7 @@ public class CustomerController {
 		return ResponseEntity.ok(
 				ApiResponse.<PageResponse<CustomerResponse>>builder()
 					.success(true)
-					.message("Customer created successfully")
+					.message("Customer fetched successfully")
 					.data(response)
 					.build());
 	}

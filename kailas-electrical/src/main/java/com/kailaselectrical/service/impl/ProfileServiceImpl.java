@@ -1,15 +1,15 @@
 package com.kailaselectrical.service.impl;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kailaselectrical.dto.request.ChangePasswordRequest;
 import com.kailaselectrical.dto.request.UpdateProfileRequest;
 import com.kailaselectrical.dto.response.ProfileResponse;
+import com.kailaselectrical.entity.Customer;
 import com.kailaselectrical.entity.User;
 import com.kailaselectrical.exception.ResourceNotFoundException;
+import com.kailaselectrical.respository.CustomerRepository;
 import com.kailaselectrical.respository.UserRepository;
 import com.kailaselectrical.security.AuthenticatedUserService;
 import com.kailaselectrical.service.ProfileService;
@@ -25,14 +25,27 @@ public class ProfileServiceImpl implements ProfileService{
 	private final PasswordEncoder passwordEncoder;
 	
 	private final AuthenticatedUserService authenticatedUserService;
+	
+	private final CustomerRepository customerRepository;
 
 	@Override
 	public ProfileResponse getProfile() {
 		
 		User user = authenticatedUserService.getLoggedInUser();
 	
+		Long customerId = null;
+		
+		if (user.getRole().name().equals("CUSTOMER")) {
+			
+			Customer customer = customerRepository.findByEmail(user.getEmail())
+					.orElseThrow(() -> new ResourceNotFoundException("Customer profile not found"));
+			
+			customerId = customer.getId();
+		}
+		
 		return ProfileResponse.builder()
 				.id(user.getId())
+				.customerId(customerId)
 				.fullName(user.getFullName())
 				.email(user.getEmail())
 				.mobileNumber(user.getMobileNumber())
@@ -51,8 +64,25 @@ public class ProfileServiceImpl implements ProfileService{
 		
 		User updatedUser = userRepository.save(user);
 		
+		Long customerId = null;
+		
+		if (user.getRole().name().equals("CUSTOMER")) {
+			
+			Customer customer = customerRepository.findByEmail(user.getEmail())
+					.orElseThrow(() -> new ResourceNotFoundException("Customer profile not found"));
+			
+			customer.setFullName(request.getFullName());
+			
+			customer.setPhoneNumber(request.getMobileNumber());
+			
+			Customer updatedCustomer = customerRepository.save(customer);
+			
+			customerId = updatedCustomer.getId();
+		}
+		
 		return ProfileResponse.builder()
 				.id(updatedUser.getId())
+				.customerId(customerId)
 				.fullName(updatedUser.getFullName())
 				.email(updatedUser.getEmail())
 				.mobileNumber(updatedUser.getMobileNumber())

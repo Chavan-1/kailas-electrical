@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.kailaselectrical.entity.Booking;
+import com.kailaselectrical.entity.Customer;
 import com.kailaselectrical.entity.Invoice;
 import com.kailaselectrical.enums.PaymentStatus;
 
@@ -55,5 +56,9 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long>, JpaSpec
 			PaymentStatus paymentStatus);
 	
 	List<Invoice> findByBookingIn(List<Booking> bookings);
+	
+	List<Invoice> findByBookingCustomer(Customer customer);
+	
+	
 }
 	

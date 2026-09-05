@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import com.kailaselectrical.common.PageResponse;
 import com.kailaselectrical.dto.request.BookingSearchCriteria;
 import com.kailaselectrical.dto.request.CreateBookingRequest;
 import com.kailaselectrical.dto.request.UpdateBookingRequest;
+import com.kailaselectrical.dto.request.UpdateBookingStatusRequest;
 import com.kailaselectrical.dto.response.BookingResponse;
 import com.kailaselectrical.service.BookingService;
 
@@ -85,6 +87,21 @@ public class BookingController {
 				.message("Booking updated successfully")
 				.data(response)
 				.build());
+	}
+	
+	@PatchMapping("/{id}/status")
+	public ResponseEntity<ApiResponse<BookingResponse>> updateBookingStatus(
+	        @PathVariable Long id,
+	        @Valid @RequestBody UpdateBookingStatusRequest request) {
+
+	    BookingResponse response = bookingService.updateBookingStatus(id, request);
+
+	    return ResponseEntity.ok(
+	            ApiResponse.<BookingResponse>builder()
+	                    .success(true)
+	                    .message("Booking status updated successfully")
+	                    .data(response)
+	                    .build());
 	}
 	
 	@DeleteMapping("/{id}")

@@ -1,9 +1,6 @@
 package com.kailaselectrical.dto.request;
 
 import java.math.BigDecimal;
-import java.util.List;
-
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -29,7 +26,4 @@ public class UpdateServiceRequest {
 	
 	@NotNull(message = "Active status is required")
 	private Boolean active;
-	
-	@Valid
-	private List<UpdateServiceTranslationRequest> translations;
 }
