@@ -9,4 +9,6 @@ public interface MyBookingService {
 	List<MyBookingResponse> getMyBookings();
 	
 	MyBookingResponse getMyBooking(Long bookingId);
+	
+	void cancelMyBooking(Long bookingId);
 }

@@ -23,8 +23,10 @@ import com.kailaselectrical.dto.response.InvoiceResponse;
 import com.kailaselectrical.entity.Booking;
 import com.kailaselectrical.entity.Customer;
 import com.kailaselectrical.entity.Invoice;
+import com.kailaselectrical.entity.User;
 import com.kailaselectrical.enums.BookingStatus;
 import com.kailaselectrical.enums.PaymentStatus;
+import com.kailaselectrical.enums.Role;
 import com.kailaselectrical.exception.ResourceAlreadyExistsException;
 import com.kailaselectrical.exception.ResourceNotFoundException;
 import com.kailaselectrical.mapper.BookingMapper;
@@ -33,11 +35,13 @@ import com.kailaselectrical.mapper.InvoiceMapper;
 import com.kailaselectrical.respository.BookingRepository;
 import com.kailaselectrical.respository.CustomerRepository;
 import com.kailaselectrical.respository.InvoiceRepository;
+import com.kailaselectrical.respository.UserRepository;
 import com.kailaselectrical.service.CustomerService;
 import com.kailaselectrical.service.EmailService;
 import com.kailaselectrical.specification.CustomerSpecification;
 import com.kailaselectrical.util.CustomerConstants;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -45,6 +49,8 @@ import lombok.RequiredArgsConstructor;
 public class CustomerServiceImpl implements CustomerService{
 
 	private final CustomerRepository customerRepository;
+	
+	private final UserRepository userRepository;
 	
 	private final CustomerMapper mapper;
 	
@@ -177,13 +183,26 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
+	@Transactional
 	public CustomerResponse updateStatus(Long id, UpdateCustomerStatusRequest request) {
 		
 		Customer customer = customerRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
 		
-		customer.setActive(request.getActive());
+		if (customer.getUser().getRole() != Role.CUSTOMER) {
+		    throw new IllegalStateException(
+		            "Only customer accounts can be activated or deactivated");
+		}
 		
+		User user = customer.getUser();
+		
+		boolean active = request.getActive();
+		
+		customer.setActive(active);
+		
+		user.setEnabled(active);
+		
+		userRepository.save(user);
 		Customer updated = customerRepository.save(customer);
 		
 		return mapper.toResponse(updated);

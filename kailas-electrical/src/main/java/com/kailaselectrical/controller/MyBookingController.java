@@ -3,6 +3,7 @@ package com.kailaselectrical.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,6 @@ import com.kailaselectrical.dto.response.MyBookingResponse;
 import com.kailaselectrical.service.MyBookingService;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/my/bookings")
@@ -44,4 +44,17 @@ public class MyBookingController {
 					.data(myBookingService.getMyBooking(id))
 					.build());
 	}
+	
+	@DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> cancelMyBooking(
+            @PathVariable Long id) {
+
+        myBookingService.cancelMyBooking(id);
+
+        return ResponseEntity.ok(
+                ApiResponse.<Void>builder()
+                        .success(true)
+                        .message("Booking cancelled successfully")
+                        .build());
+    }
 }

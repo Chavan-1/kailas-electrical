@@ -7,4 +7,6 @@ public interface EmailService {
 	void sendInvoice(Long invoiceId);
 	
 	void sendWelcomeEmail(Long customerId);
+	
+	void sendPasswordResetEmail(String toEmail, String fullName, String resetLink);
 }

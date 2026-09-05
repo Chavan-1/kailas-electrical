@@ -11,7 +11,7 @@ public class SearchCriteria {
 	
 	private Integer page = 0;
 	
-	private Integer size = 5;
+	private Integer size = 10;
 	
 	private String sortBy;
 	

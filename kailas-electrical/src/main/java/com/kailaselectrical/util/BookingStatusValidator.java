@@ -35,11 +35,6 @@ public class BookingStatusValidator {
 						BookingStatus.CANCELLED));
 		
 		ALLOWED_TRANSITIONS.put(
-				BookingStatus.IN_PROGRESS,
-				EnumSet.of(
-						BookingStatus.COMPLETED));
-		
-		ALLOWED_TRANSITIONS.put(
 				BookingStatus.COMPLETED,
 				EnumSet.noneOf(BookingStatus.class));
 		

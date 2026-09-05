@@ -3,6 +3,7 @@ package com.kailaselectrical.service.impl;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,6 +48,10 @@ public class ServiceServiceImpl implements ElectricalServiceService{
 	public ServiceResponse createService(CreateServiceRequest request) {
 		
 		List<CreateServiceTranslationRequest> translations = Optional.ofNullable(request.getTranslations()).orElse(Collections.emptyList());
+		
+		if(translations.size() != 1) {
+			throw new IllegalArgumentException("Exactly one translation is required when creating a service");
+		}
 		
 		for (CreateServiceTranslationRequest translation : translations) {
 			
@@ -130,36 +135,11 @@ public class ServiceServiceImpl implements ElectricalServiceService{
 	@Override
 	public ServiceResponse updateService(Long id, UpdateServiceRequest request) {
 		
-		List<UpdateServiceTranslationRequest> translations = Optional.ofNullable(request.getTranslations()).orElse(Collections.emptyList());
-		
 		ElectricalService service = serviceRespository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Service not found with id : "+ id));
 		
-		for (UpdateServiceTranslationRequest translation : translations) {
-			
-			translationRepository.findByServiceNameIgnoreCase(translation.getServiceName())
-				.filter(existing -> !existing.getElectricalService().getId().equals(id))
-				.ifPresent(existing -> {
-					throw new ResourceAlreadyExistsException("Service already exists : " + translation.getServiceName());
-				});
-		}
-		
 		mapper.updateEntity(service, request);
-		
-		service.getTranslations().clear();
-		
-		for (UpdateServiceTranslationRequest translationRequest : translations) {
-			
-			ElectricalServiceTranslations translation = ElectricalServiceTranslations.builder()
-					.languageCode(translationRequest.getLanguageCode())
-					.serviceName(translationRequest.getServiceName())
-					.description(translationRequest.getDescription())
-					.electricalService(service)
-					.build();
-			
-			service.getTranslations().add(translation);
-		}
-		
+
 		ElectricalService updated = serviceRespository.save(service);
 		
 		return mapper.toResponse(updated);

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -19,10 +20,11 @@ public class CreateBookingRequest {
 	@NotEmpty(message = "At least one service is required")
 	private List<Long> serviceIds;
 	
-	@NotNull
+	@NotNull(message = "Booking date is required")
+	@FutureOrPresent(message = "Booking date cannot be in the past")
 	private LocalDate bookingDate;
 	
-	@NotNull
+	@NotNull(message = "Booking time is required")
 	private LocalTime bookingTime;
 	
 	private String remarks;

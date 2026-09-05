@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.InputStreamSource;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -150,7 +151,7 @@ public class EmailServiceImpl implements EmailService{
 		try {
 			
 			log.info("Generating PDF for Invoice {}", invoice.getInvoiceNumber());
-			System.out.println("Generating PDF for Invoice {}" + invoice.getInvoiceNumber());
+			System.out.println("Generating PDF for Invoice " + invoice.getInvoiceNumber());
 			
 			byte[] pdf = pdfGenerator.generate(invoice);
 			
@@ -211,5 +212,26 @@ public class EmailServiceImpl implements EmailService{
 				
 			}
 			
+	}
+
+	@Override
+	public void sendPasswordResetEmail(String toEmail, String fullName, String resetLink) {
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		
+		message.setTo(toEmail);
+		message.setSubject("Reset your password");
+		
+		message.setText(
+				"Hello " + fullName + ",\n\n"
+				+ "We received a request to reset your password.\n\n"
+				+ "Use the link below to reset it:\n"
+				+ resetLink
+				+ "\n\nThis link will expire in 30 minutes."
+		);
+		
+		mailSender.send(message);
+		log.info("Password reset link: {}", resetLink);
+		
 	}
 }

@@ -112,10 +112,14 @@ public class InvoiceServiceImpl implements InvoiceService{
 		Invoice saved = invoiceRepository.save(invoice);
 		
 		try {
+			
 			emailService.sendInvoice(saved.getId());
 			
 		} catch (Exception e) {
+			
+			System.out.println("========== INVOICE EMAIL FAILED ==========");
 			throw new RuntimeException("Unable to send invoice email", e);
+			
 		}
 		
 		return mapper.toResponse(saved);
@@ -199,5 +203,13 @@ public class InvoiceServiceImpl implements InvoiceService{
 		Invoice invoice = invoiceRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Invoice not found"));
 		return invoicePdfGenerator.generate(invoice);
+	}
+
+	@Override
+	public InvoiceResponse getInvoiceByBookingId(Long bookingId) {
+		
+		Invoice invoice = invoiceRepository.findByBookingId(bookingId).orElse(null);
+		
+		return invoice != null ? mapper.toResponse(invoice) : null;
 	}
 }

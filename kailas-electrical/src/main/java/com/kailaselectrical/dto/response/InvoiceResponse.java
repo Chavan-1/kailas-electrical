@@ -27,6 +27,10 @@ public class InvoiceResponse {
 	
 	private String customerName;
 	
+	private String phoneNumber;
+
+    private String email;
+	
 	private LocalDate invoiceDate;
 	
 	private List<InvoiceItemResponse> items;
