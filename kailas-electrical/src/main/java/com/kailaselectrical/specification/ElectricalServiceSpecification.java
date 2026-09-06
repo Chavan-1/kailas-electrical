@@ -7,7 +7,6 @@ import org.springframework.data.jpa.domain.Specification;
 import com.kailaselectrical.entity.ElectricalService;
 import com.kailaselectrical.entity.ElectricalServiceTranslations;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Join;
 
 public class ElectricalServiceSpecification {
@@ -36,14 +35,14 @@ public class ElectricalServiceSpecification {
 				return cb.conjunction();
 			}
 			
-			String search = "%" + keyword.toLowerCase() + "%";
+			String search = "%" + keyword.trim().toLowerCase() + "%";
 			
 			Join<ElectricalService, ElectricalServiceTranslations> translation = 
-					root.join("translation");
+					root.join("translations");
 			
 			return cb.or(
-					cb.like(cb.lower(translation.get("serviceName")),  "%" + keyword.toLowerCase() + ""),
-					cb.like(cb.lower(root.get("description")), search)
+					cb.like(cb.lower(translation.get("serviceName")), search),
+					cb.like(cb.lower(translation.get("description")), search)
 			);
 		};
 	}
