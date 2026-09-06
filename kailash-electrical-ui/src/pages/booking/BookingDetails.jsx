@@ -6,6 +6,7 @@ import { getProfile } from "../../services/ProfileService";
 import { Alert, Button, Divider, FormControl, MenuItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Select } from "@mui/material";
 import { ArrowBack, Edit, Receipt, Save } from "@mui/icons-material";
 import { generateInvoice, getInvoices } from "../../services/InvoiceService";
+import { getRole } from "../../utils/auth";
 
 const BookingDetails = () => {
 
@@ -25,10 +26,10 @@ const BookingDetails = () => {
     const [statusError, setStatusError] = useState("");
 
     const [generatingInvoice, setGeneratingInvoice] = useState(false);
-    const [invoiceError, setInvoiceError] = useState("");
 
     const [existingInvoice, setExistingInvoice] = useState(null);
 
+    const isAdmin = getRole() === "ADMIN";
 
     const loadBooking = async (userRole) => {
 
@@ -332,7 +333,7 @@ const BookingDetails = () => {
                         {t("common.back")}
                     </Button>
 
-                    {booking.status !== "COMPLETED" && booking.status !== "CANCELLED" && (
+                    {isAdmin && booking.status !== "COMPLETED" && booking.status !== "CANCELLED" && (
 
                         <Button variant="contained"
                                 startIcon={<Edit />}
