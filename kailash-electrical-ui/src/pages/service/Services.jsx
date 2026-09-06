@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Alert, Button, Chip, CircularProgress, FormControl, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Typography } from "@mui/material";
 import { Add, Delete, DeleteOutlineOutlined, Edit, Search, Visibility } from "@mui/icons-material";
+import { getRole } from "../../utils/auth";
 
 function Services() {
 
@@ -20,6 +21,9 @@ function Services() {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+
+    const role = getRole();
+    const isAdmin = role === "ADMIN";
 
     const loadServices = async () => {
 
@@ -92,6 +96,8 @@ function Services() {
 
     const handleDelete = async (id) => {
 
+        if (!isAdmin) return;
+
         const confirmed = window.confirm(t("service.deleteConfirmation"));
 
         if (!confirmed) return;
@@ -136,9 +142,11 @@ function Services() {
 
                 <Typography variant="h4" fontWeight={600}>{t("service.services")}</Typography>
 
-                <Button variant="contained" startIcon={<Add />} onClick={() => navigate("/services/create")}>
-                    {t("service.addService")}
-                </Button>
+                {isAdmin && (
+                    <Button variant="contained" startIcon={<Add />} onClick={() => navigate("/services/create")}>
+                        {t("service.addService")}
+                    </Button>
+                )}
 
             </div>
 
@@ -151,7 +159,10 @@ function Services() {
 
             <Paper elevation={2} sx={{ p: 3, mb: 3, borderRadius: 3 }}>
 
-                <div style={filterContainerStyle}>
+                <div
+                    style={{...filterContainerStyle,
+                        gridTemplateColumns: isAdmin ? "1fr 180px auto" : "1fr auto"
+                    }}>
 
                     <TextField 
                         label={t("service.search")}
@@ -161,17 +172,21 @@ function Services() {
                         fullWidth
                     />
 
-                    <FormControl sx={{ minWidth: 180 }}>
+                    {isAdmin && (
 
-                        <InputLabel>{t("common.status")}</InputLabel>
+                        <FormControl sx={{ minWidth: 180 }}>
 
-                        <Select value={status} label={t("common.status")} onChange={handleStatusChange}>
-                            <MenuItem value="ALL">{t("common.all")}</MenuItem>
-                            <MenuItem value="ACTIVE">{t("common.active")}</MenuItem>
-                            <MenuItem value="INACTIVE">{t("common.inactive")}</MenuItem>
-                        </Select>
+                            <InputLabel>{t("common.status")}</InputLabel>
 
-                    </FormControl>
+                            <Select value={status} label={t("common.status")} onChange={handleStatusChange}>
+                                <MenuItem value="ALL">{t("common.all")}</MenuItem>
+                                <MenuItem value="ACTIVE">{t("common.active")}</MenuItem>
+                                <MenuItem value="INACTIVE">{t("common.inactive")}</MenuItem>
+                            </Select>
+
+                        </FormControl>
+
+                    )}
 
                     <Button variant="contained" 
                             startIcon={<Search />} 
@@ -268,23 +283,30 @@ function Services() {
                                         {t("common.view")}
                                     </Button>
 
-                                    <Button size="small"
-                                            variant="contained"
-                                            color="primary"
-                                            startIcon={<Edit />}
-                                            onClick={() => navigate(`/services/${service.id}/edit`)}>
+                                    {isAdmin && (
 
-                                        {t("common.edit")}
-                                    </Button>
+                                        <Button size="small"
+                                                variant="contained"
+                                                color="primary"
+                                                startIcon={<Edit />}
+                                                onClick={() => navigate(`/services/${service.id}/edit`)}>
 
-                                    <Button size="small"
-                                            color="error"
-                                            variant="contained"
-                                            startIcon={<Delete />}
-                                            onClick={() => handleDelete(service.id)}>
+                                            {t("common.edit")}
+                                        </Button>
+                                    )}
 
-                                        {t("common.delete")}
-                                    </Button>
+                                    {isAdmin && (
+
+                                        <Button size="small"
+                                                color="error"
+                                                variant="contained"
+                                                startIcon={<Delete />}
+                                                onClick={() => handleDelete(service.id)}>
+
+                                            {t("common.delete")}
+                                        </Button>
+
+                                    )}
 
                                 </div>
 
