@@ -162,7 +162,7 @@ function CustomerDashboard() {
                   sx={{ 
                         height: "100%", 
                         cursor: "pointer", 
-                        "&:hover": {boxShadow: 6} 
+                        "&:hover": {boxShadow: 12} 
                       }}
                   onClick={() => navigate("/bookings/create")}>
 

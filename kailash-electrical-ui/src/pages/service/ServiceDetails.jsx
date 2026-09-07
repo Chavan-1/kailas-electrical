@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getServiceById } from "../../services/ServiceService";
 import { Alert, Button, Chip, CircularProgress, Divider, Paper, Typography } from "@mui/material";
 import { AccessTime, ArrowBack, Cancel, CheckCircle, CurrencyRupee, Edit } from "@mui/icons-material";
+import { getRole } from "../../utils/auth";
 
 const ServiceDetails = () => {
 
@@ -14,6 +15,9 @@ const ServiceDetails = () => {
     const [service, setService] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+
+    const role = getRole();
+    const isAdmin = role === "ADMIN";
 
     const loadService = async () => {
 
@@ -93,17 +97,19 @@ const ServiceDetails = () => {
 
             <div style={headerStyle}>
 
-                <Button variant="outlined" startIcon={<ArrowBack />} onClick={() => navigate("/services")}>
+                <Button startIcon={<ArrowBack />} onClick={() => navigate("/services")}>
                     {t("common.back")}
                 </Button>
 
                 <Typography variant="h4" fontWeight={600}>
                     {t("service.serviceDetails")}
                 </Typography>
-
-                <Button variant="contained" startIcon={<Edit />} onClick={() => navigate(`/services/${id}/edit`)}>
-                    {t("common.edit")}
-                </Button>
+                
+                {isAdmin && (
+                    <Button variant="contained" startIcon={<Edit />} onClick={() => navigate(`/services/${id}/edit`)}>
+                        {t("common.edit")}
+                    </Button>
+                )}
 
             </div>
 
