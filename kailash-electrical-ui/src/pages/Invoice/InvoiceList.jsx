@@ -391,7 +391,7 @@ const InvoiceList = () => {
 
                                             <Button
                                                 size="small"
-                                                variant="outlined"
+                                                variant="contained"
                                                 startIcon={<Visibility />}
                                                 onClick={() => handleViewInvoice(invoice.id)}
                                             >
