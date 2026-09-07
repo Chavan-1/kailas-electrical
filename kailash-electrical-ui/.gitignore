@@ -25,3 +25,7 @@ dist-ssr
 
 # Eclipse / Spring Tools
 .metadata/
+
+.env
+.env.local
+.env.*
