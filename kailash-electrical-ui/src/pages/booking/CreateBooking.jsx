@@ -5,6 +5,7 @@ import { getCustomers } from "../../services/CustomerService";
 import { useNavigate } from "react-router-dom";
 import { getProfile } from "../../services/ProfileService";
 import { useTranslation } from "react-i18next";
+import { Checkbox, ListItemText, MenuItem, Select } from "@mui/material";
 
 function CreateBooking() {
 
@@ -107,20 +108,9 @@ function CreateBooking() {
         }
     };
 
-    const handleServiceChange = (serviceId) => {
+    const handleServiceChange = (event) => {
 
-        const id = Number(serviceId);
-
-        if (selectedServices.includes(id)) {
-
-            setSelectedServices(selectedServices.filter(
-                service => service !== id
-            ));
-
-        } else {
-
-            setSelectedServices([...selectedServices, id]);
-        }
+        setSelectedServices(event.target.value);        
     };
 
     const handleSubmit = async (event) => {
@@ -211,8 +201,8 @@ function CreateBooking() {
 
         return (
             <div style={pageStyle}>
-                <h1 style={headingStyle}>t("booking.createBooking")</h1>
-                <p>t("booking.loadingCustomersServices")</p>
+                <h1 style={headingStyle}>{t("booking.createBooking")}</h1>
+                <p>{t("booking.loadingCustomersServices")}</p>
             </div>
         );
     }
@@ -267,26 +257,41 @@ function CreateBooking() {
                     )}
 
                     <div style={fieldContainerStyle}>
-                        
                         <label style={labelStyle}>{t("common.services")}</label>
 
-                        <div style={serviceContainerStyle}>
-                            
-                            {services.filter(service => service.active)
-                                     .map(service => (
-                                        <label key={service.id} style={serviceOptionStyle}>
+                        <select
+                            multiple
+                            value={selectedServices}
+                            onChange={(e) => handleServiceChange(e.target.value)}
+                            displayEmpty
+                            fullWidth
+                            renderValue={(selected) => {
+                                if (selected.length === 0) {
+                                    return t("service.selectService");
+                                }
 
-                                           <input type="checkbox" 
-                                                checked={selectedServices.includes(service.id)}
-                                                onChange={() => handleServiceChange(service.id)} />
+                                return services
+                                    .filter(service => selected.includes(service.id))
+                                    .map(service => service.serviceName)
+                                    .join(", ");
+                            }}
+                        >
+                            {services
+                                .filter(service => service.active)
+                                .map(service => (
+                                    <MenuItem key={service.id} value={service.id}>
+                                        <Checkbox
+                                            checked={selectedServices.includes(service.id)}
+                                        />
 
-                                            <span>{service.serviceName}</span>
-                                            <span style={priceStyle}>₹{service.basePrice}</span>
+                                        <ListItemText primary={service.serviceName}/>
 
-                                        </label>
-                                     ))}
-                        </div>
-                        
+                                        <span style={{ marginLeft: "auto" }}>
+                                            ₹{service.basePrice}
+                                        </span>
+                                    </MenuItem>
+                                ))}
+                        </select>
                     </div>
                     
                     <div style={fieldContainerStyle}>

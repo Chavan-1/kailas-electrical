@@ -316,7 +316,8 @@
     "serviceInformation": "Service Information",
     "loadingService": "Loading service...",
     "activeService": "Service is Active",
-    "inactiveService": "Service is Inactive"
+    "inactiveService": "Service is Inactive",
+    "selectService": "Select Service"
   },
 
   "auth": {
@@ -365,7 +366,14 @@
       "passwordResetSuccess": "Password reset successfully.",
       "failedToResetPassword": "Failed to reset password.",
       "resetting": "Resetting...",
-      "resetPassword": "Reset Password"
+      "resetPassword": "Reset Password",
+      "professionalElectricalServices": "Professional Electrical",
+      "servicesMadeSimple": "Services Made Simple",
+      "manageCustomersBookings": "Manage customers, bookings, services and invoices from one simple platform.",
+      "welcomeBack": "Welcome back! Please enter your details.",
+      "easyCustomerBookingManagement": "Easy customer and booking management",
+      "trackServicesPayments": "Track services and payments",
+      "generateProfessionalInvoices": "Generate professional invoices"
   },
 
   "profile": {

@@ -338,8 +338,8 @@
     "serviceInformation": "सेवेची माहिती",
     "loadingService": "सेवा लोड होत आहे...",
     "activeService": "सेवा सक्रिय आहे",
-    "inactiveService": "सेवा निष्क्रिय आहे"
-
+    "inactiveService": "सेवा निष्क्रिय आहे",
+    "selectService": "सेवा निवडा"
   },
 
   "auth": {
@@ -378,18 +378,25 @@
       "loggedInAs": "या नावाने लॉग इन केले आहे",
       "goToDashboard": "डॅशबोर्डवर जा",
       "forgotPassword": "पासवर्ड विसरलात?",
-    "passwordResetLinkSent": "पासवर्ड रीसेट लिंक तुमच्या ईमेलवर पाठवण्यात आला आहे.",
-    "failedToSendResetInstructions": "पासवर्ड रीसेट सूचना पाठवण्यात अयशस्वी.",
-    "enterRegisteredEmail": "तुमचा नोंदणीकृत ईमेल पत्ता प्रविष्ट करा.",
-    "sending": "पाठवत आहे...",
-    "sendResetLink": "रीसेट लिंक पाठवा",
-    "backToLogin": "लॉगिनवर परत जा",
+      "passwordResetLinkSent": "पासवर्ड रीसेट लिंक तुमच्या ईमेलवर पाठवण्यात आला आहे.",
+      "failedToSendResetInstructions": "पासवर्ड रीसेट सूचना पाठवण्यात अयशस्वी.",
+      "enterRegisteredEmail": "तुमचा नोंदणीकृत ईमेल पत्ता प्रविष्ट करा.",
+      "sending": "पाठवत आहे...",
+      "sendResetLink": "रीसेट लिंक पाठवा",
+      "backToLogin": "लॉगिनवर परत जा",
 
-    "invalidResetLink": "अवैध पासवर्ड रीसेट लिंक.",
-    "passwordResetSuccess": "पासवर्ड यशस्वीरित्या रीसेट केला.",
-    "failedToResetPassword": "पासवर्ड रीसेट करण्यात अयशस्वी.",
-    "resetting": "रीसेट करत आहे...",
-    "resetPassword": "पासवर्ड रीसेट करा"
+      "invalidResetLink": "अवैध पासवर्ड रीसेट लिंक.",
+      "passwordResetSuccess": "पासवर्ड यशस्वीरित्या रीसेट केला.",
+      "failedToResetPassword": "पासवर्ड रीसेट करण्यात अयशस्वी.",
+      "resetting": "रीसेट करत आहे...",
+      "resetPassword": "पासवर्ड रीसेट करा",
+      "professionalElectricalServices": "व्यावसायिक इलेक्ट्रिकल",
+      "servicesMadeSimple": "सेवा व्यवस्थापन आता सोपे",
+      "manageCustomersBookings": "एका सोप्या प्लॅटफॉर्मवरून ग्राहक, बुकिंग, सेवा आणि इनव्हॉइस व्यवस्थापित करा.",
+      "welcomeBack": "पुन्हा स्वागत आहे! कृपया आपले तपशील प्रविष्ट करा.",
+      "easyCustomerBookingManagement": "ग्राहक आणि बुकिंगचे सोपे व्यवस्थापन",
+      "trackServicesPayments": "सेवा आणि पेमेंटचा मागोवा घ्या",
+      "generateProfessionalInvoices": "व्यावसायिक इनव्हॉइस तयार करा"
   },
 
   "profile": {
