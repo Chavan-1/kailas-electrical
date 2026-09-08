@@ -24,6 +24,7 @@ const BookingDetails = () => {
     const [updatingStatus, setUpdatingStatus] = useState(false);
     const [statusSuccess, setStatusSuccess] = useState("");
     const [statusError, setStatusError] = useState("");
+    const [invoiceError, setInvoiceError] = useState("");
 
     const [generatingInvoice, setGeneratingInvoice] = useState(false);
 
@@ -288,7 +289,7 @@ const BookingDetails = () => {
         return (
 
             <div style={pageStyle}>
-                <Typography>t("booking.loadingBooking")</Typography>
+                <Typography>{t("booking.loadingBooking")}</Typography>
             </div>
         );
 
