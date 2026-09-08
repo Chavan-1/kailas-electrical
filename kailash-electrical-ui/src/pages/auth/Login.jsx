@@ -37,10 +37,7 @@ function Login() {
             console.log("Login Response: ", response);
 
             if (!response.success) {
-                setError(
-                    response.message ||
-                    t("auth.loginFailedCredentials")
-                );
+                setError(response.message || t("auth.loginFailedCredentials"));
                 return;
             }
 
@@ -86,24 +83,18 @@ function Login() {
             sx={{
                 minHeight: "100vh",
                 display: "flex",
-                background:
-                    "linear-gradient(135deg, #f5f7fb 0%, #e8eef7 100%)",
+                background:"linear-gradient(135deg, #f5f7fb 0%, #e8eef7 100%)",
             }}
         >
 
-            {/* LEFT SIDE */}
             <Box
                 sx={{
                     flex: 1,
-                    display: {
-                        xs: "none",
-                        md: "flex",
-                    },
+                    display: { xs: "none", md: "flex"},
                     flexDirection: "column",
                     justifyContent: "center",
                     px: { md: 6, lg: 10 },
-                    background:
-                        "linear-gradient(135deg, #0f3d56 0%, #1976a8 100%)",
+                    background: "linear-gradient(135deg, #0f3d56 0%, #1976a8 100%)",
                     color: "white",
                     position: "relative",
                     overflow: "hidden",
@@ -137,7 +128,6 @@ function Login() {
 
                 <Box sx={{ position: "relative", zIndex: 1 }}>
 
-                    {/* Logo */}
                     <Box
                         sx={{
                             display: "flex",
@@ -162,17 +152,11 @@ function Login() {
                         </Box>
 
                         <Box>
-                            <Typography
-                                variant="h5"
-                                fontWeight={700}
-                            >
+                            <Typography variant="h5" fontWeight={700}>
                                 {t("common.appName")}
                             </Typography>
 
-                            <Typography
-                                variant="body2"
-                                sx={{ opacity: 0.8 }}
-                            >
+                            <Typography  variant="body2" sx={{ opacity: 0.8 }}>
                                 {t("auth.systemTitle")}
                             </Typography>
                         </Box>
@@ -191,9 +175,9 @@ function Login() {
                             mb: 2,
                         }}
                     >
-                        Professional Electrical
+                        {t("auth.professionalElectricalServices")}
                         <br />
-                        Services Made Simple
+                        {t("auth.servicesMadeSimple")}
                     </Typography>
 
                     <Typography
@@ -205,17 +189,16 @@ function Login() {
                             mb: 4,
                         }}
                     >
-                        Manage customers, bookings, services and
-                        invoices from one simple platform.
+                        {t("auth.manageCustomersBookings")}
                     </Typography>
 
                     {/* Features */}
                     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
 
                         {[
-                            "Easy customer and booking management",
-                            "Track services and payments",
-                            "Generate professional invoices",
+                            t("auth.easyCustomerBookingManagement"),
+                            t("auth.trackServicesPayments"),
+                            t("auth.generateProfessionalInvoices"),
                         ].map((feature) => (
 
                             <Box
@@ -249,7 +232,6 @@ function Login() {
             </Box>
 
 
-            {/* RIGHT SIDE */}
             <Box
                 sx={{
                     flex: 1,
@@ -309,7 +291,7 @@ function Login() {
                         </Typography>
 
                         <Typography variant="body2" color="text.secondary" sx={{ mb: 3.5 }}>
-                            Welcome back! Please enter your details.
+                            {t("auth.welcomeBack")}
                         </Typography>
 
 
@@ -404,7 +386,7 @@ function Login() {
                                         fontWeight: 600,
                                     }}
                                 >
-                                    {t("auth.forgotPassword")}
+                                    {t("auth.forgotPassword")}?
                                 </Button>
 
                             </Box>
