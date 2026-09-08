@@ -126,3 +126,14 @@ Production debugging
 The application is deployed using Railway for backend/database hosting.
 
 The project repository is maintained on GitHub.
+
+Application pages:
+Login Page:
+<img width="1898" height="962" alt="image" src="https://github.com/user-attachments/assets/387a0dc0-606f-42cd-8e3d-2a8a8594d27c" />
+
+Register Page:
+<img width="1553" height="957" alt="image" src="https://github.com/user-attachments/assets/2e8853d6-aae2-4651-afc8-3c5ea0cfe748" />
+
+Forgot Password Page:
+<img width="1568" height="973" alt="image" src="https://github.com/user-attachments/assets/4ad23ccc-0559-4703-a443-9ce9a2007de9" />
+
