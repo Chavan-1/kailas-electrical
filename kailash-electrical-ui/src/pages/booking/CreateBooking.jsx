@@ -57,7 +57,11 @@ function CreateBooking() {
 
             setRole(userRole);
 
-            const serviceResponse = await getServices();
+            const serviceResponse = await getServices({
+                page: 0,
+                size: 100,
+                direction: "asc"
+            });
 
             console.log("Service API response:", serviceResponse);
 
@@ -262,29 +266,67 @@ function CreateBooking() {
                         <Select
                             multiple
                             value={selectedServices}
-                            onChange={(e) => handleServiceChange(e.target.value)}
+                            onChange={handleServiceChange}
                             displayEmpty
                             fullWidth
+                            MenuProps={{
+                                sx: {
+                                    "& .MuiPaper-root": {
+                                        maxHeight: "350px",
+                                    },
+                                },
+                            }}
                             renderValue={(selected) => {
                                 if (selected.length === 0) {
                                     return t("service.selectService");
                                 }
 
-                                return services
+                                const selectedNames = services
                                     .filter(service => selected.includes(service.id))
-                                    .map(service => service.serviceName)
-                                    .join(", ");
+                                    .map(service => service.serviceName);
+
+                                if (selectedNames.length <= 2) {
+                                    return selectedNames.join(", ");
+                                }
+
+                                return `${selectedNames.slice(0, 2).join(", ")} + ${
+                                    selectedNames.length - 2
+                                } more`;
+                            }}
+                            sx={{
+                                "& .MuiSelect-select": {
+                                    padding: "12px",
+                                    fontSize: "15px",
+                                },
+
+                                "& .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "#ccc",
+                                },
+
+                                "&:hover .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "#999",
+                                },
+
+                                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "#1976d2",
+                                },
+
+                                borderRadius: "5px",
+                                backgroundColor: "white",
                             }}
                         >
                             {services
                                 .filter(service => service.active)
                                 .map(service => (
-                                    <MenuItem key={service.id} value={service.id}>
+                                    <MenuItem
+                                        key={service.id}
+                                        value={service.id}
+                                    >
                                         <Checkbox
                                             checked={selectedServices.includes(service.id)}
                                         />
 
-                                        <ListItemText primary={service.serviceName}/>
+                                        <ListItemText primary={service.serviceName} />
 
                                         <span style={{ marginLeft: "auto" }}>
                                             ₹{service.basePrice}
