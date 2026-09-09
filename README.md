@@ -156,7 +156,7 @@ Customer- Create Booking Page:
 <img width="1891" height="948" alt="image" src="https://github.com/user-attachments/assets/7ca6a5a6-4212-42a7-8830-626719ac4ece" />
 
 Customer- Booking Details Page:
-<img width="1906" height="962" alt="image" src="https://github.com/user-attachments/assets/07040a4b-e092-405d-9d3f-759754ffbbc0" />
+<img width="1915" height="957" alt="image" src="https://github.com/user-attachments/assets/07cff4d2-7a2e-48ed-9b8c-277a787723c8" />
 
 Customer- Invoices Page:
 <img width="1912" height="937" alt="image" src="https://github.com/user-attachments/assets/690dd3ee-5fa4-46e5-a435-7f9e2ec6e595" />
