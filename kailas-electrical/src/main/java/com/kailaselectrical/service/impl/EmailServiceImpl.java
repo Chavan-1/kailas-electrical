@@ -9,6 +9,7 @@ import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.kailaselectrical.entity.Booking;
@@ -143,6 +144,7 @@ public class EmailServiceImpl implements EmailService{
 	}
 
 	@Override
+	@Async
 	public void sendInvoice(Long invoiceId) {
 	
 		Invoice invoice = invoiceRepository.findById(invoiceId)
@@ -208,6 +210,7 @@ public class EmailServiceImpl implements EmailService{
 			
 			} catch (Exception e) {
 				
+				log.error("Unable to send invoice email for invoice {}: {}", invoice.getInvoiceNumber(), e.getMessage());
 				throw new RuntimeException("Unable to send invoice email", e);
 				
 			}

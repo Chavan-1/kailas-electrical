@@ -111,16 +111,7 @@ public class InvoiceServiceImpl implements InvoiceService{
 		
 		Invoice saved = invoiceRepository.save(invoice);
 		
-		try {
-			
-			emailService.sendInvoice(saved.getId());
-			
-		} catch (Exception e) {
-			
-			System.out.println("========== INVOICE EMAIL FAILED ==========");
-			throw new RuntimeException("Unable to send invoice email", e);
-			
-		}
+		emailService.sendInvoice(saved.getId());
 		
 		return mapper.toResponse(saved);
 	}
