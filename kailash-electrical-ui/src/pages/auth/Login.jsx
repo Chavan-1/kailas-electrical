@@ -310,7 +310,7 @@ function Login() {
                                 required
                                 margin="normal"
                                 autoComplete="email"
-                                InputProps={{
+                                inputprops={{
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <EmailOutlined
@@ -335,7 +335,7 @@ function Login() {
                                 required
                                 margin="normal"
                                 autoComplete="current-password"
-                                InputProps={{
+                                inputprops={{
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <LockOutlined
