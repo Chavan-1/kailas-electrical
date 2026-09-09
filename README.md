@@ -13,6 +13,12 @@ The application provides separate functionality for:
 - 👨‍💼 Admin
 - 👤 Customer
 
+The application provides Multilingual Support:
+
+- English
+- Hindi
+- Marathi
+
 Admins can manage customers, electrical services, bookings and invoices, while customers can browse services, create bookings, manage their profile and access their own invoices.
 
 🏗️ Architecture
