@@ -259,7 +259,7 @@ function CreateBooking() {
                     <div style={fieldContainerStyle}>
                         <label style={labelStyle}>{t("common.services")}</label>
 
-                        <select
+                        <Select
                             multiple
                             value={selectedServices}
                             onChange={(e) => handleServiceChange(e.target.value)}
@@ -291,7 +291,7 @@ function CreateBooking() {
                                         </span>
                                     </MenuItem>
                                 ))}
-                        </select>
+                        </Select>
                     </div>
                     
                     <div style={fieldContainerStyle}>
