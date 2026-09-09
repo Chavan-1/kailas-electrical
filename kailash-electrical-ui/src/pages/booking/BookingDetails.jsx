@@ -345,7 +345,7 @@ const BookingDetails = () => {
 
                     )}
 
-                    {booking.status === "COMPLETED" && (
+                    {isAdmin && booking.status === "COMPLETED" && (
 
                         existingInvoice ? (
 
