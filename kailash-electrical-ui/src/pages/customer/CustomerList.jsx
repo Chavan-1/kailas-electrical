@@ -198,13 +198,13 @@ const CustomerList = () => {
 
         <div style={pageStyle}>
 
-            {/* <div style={headerStyle}>
+            <div style={headerStyle}>
 
                 <Typography variant="h4" fontWeight={600}>{t("customer.title")}</Typography>
 
-                <Button variant="contained" onClick={handleAddCustomer} startIcon={<Add />}>{t("customer.addCustomer")}</Button>
+                {/* <Button variant="contained" onClick={handleAddCustomer} startIcon={<Add />}>{t("customer.addCustomer")}</Button> */}
 
-            </div> */}
+            </div>
 
             {error && (
                     <Alert severity="error" 
@@ -220,7 +220,7 @@ const CustomerList = () => {
                 <div style={filterStyle}>
 
                     <TextField label={t("common.searchCustomer")}
-                            placeholder={t("customer.namePhoneOrEmail")}
+                            placeholder={t("common.namePhoneOrEmail")}
                             value={search} 
                             onChange={(e) => setSearch(e.target.value)}
                             fullWidth />
@@ -259,7 +259,7 @@ const CustomerList = () => {
                         <TableHead>
 
                             <TableRow>
-                                <TableCell>{t("commom.all")}</TableCell>
+                                <TableCell>{t("common.all")}</TableCell>
                                 <TableCell>{t("customer.fullName")}</TableCell>
                                 <TableCell>{t("customer.phoneNumber")}</TableCell>
                                 <TableCell>{t("customer.email")}</TableCell>
