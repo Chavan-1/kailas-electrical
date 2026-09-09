@@ -204,4 +204,13 @@ Multilingual Support
 <img width="1903" height="950" alt="image" src="https://github.com/user-attachments/assets/c0b18cdc-58d0-473e-8fd9-e37c9421919e" />
 <img width="1897" height="950" alt="image" src="https://github.com/user-attachments/assets/2e6db942-2146-4b16-8a92-6c270051ae1c" />
 
+Deployed Backend Code on Render:
+<img width="1901" height="937" alt="image" src="https://github.com/user-attachments/assets/88bbaa48-a20b-4169-8920-4b906104aaec" />
+
+Deployed Frontend Code on Varcel:
+<img width="1887" height="960" alt="image" src="https://github.com/user-attachments/assets/cdc0f885-15bf-46ac-8a6e-054156a48330" />
+
+Using Railway DB:
+<img width="1916" height="947" alt="image" src="https://github.com/user-attachments/assets/99f1c6a1-4b2d-4f58-906c-7175c4a60be8" />
+
 
